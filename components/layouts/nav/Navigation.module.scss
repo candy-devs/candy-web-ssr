@@ -1,0 +1,39 @@
+@import url("http://fonts.googleapis.com/css?family=Roboto");
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+
+.NavBox {
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: 30;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+}
+
+.NavBoxUp {
+  padding: 10px 16px 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.NavBoxTitle {
+  font: normal normal bold 22px/48px Roboto;
+  letter-spacing: 5px;
+  // padding: 0 0 0 16px;
+  text-align: left;
+  /* font: normal normal bold 40px/48px Roboto; */
+  color: #191919;
+  opacity: 1;
+}
+
+.NavBoxSetting {
+  svg {
+    fill: #454c52;
+    width: 28px;
+    height: 28px;
+
+    path {
+      stroke-width: 0;
+    }
+  }
+}

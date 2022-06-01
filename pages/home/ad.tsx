@@ -3,13 +3,13 @@ import React from 'react'
 import Divide from '../../components/Divide';
 import NavigationLayout from '../../components/layouts/NavigationLayout';
 
-const My: NextPage = () => {
+const Ad: NextPage = () => {
   return (
-    <NavigationLayout page={3}>
+    <NavigationLayout page={4}>
       <Divide />
       <Divide />
     </NavigationLayout>
   );
 };
 
-export default My;
+export default Ad;

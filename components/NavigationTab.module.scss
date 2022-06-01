@@ -1,0 +1,49 @@
+.NavBoxTab {
+  // margin: 12px 0 0 0;
+  /* padding: 0 32px 10px 32px; */
+  /* padding:  */
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  color: #767676;
+  font: normal normal bold 14px/32px Noto Sans KR;
+}
+
+.NavBoxTabItem {
+  // https://stackoverflow.com/a/29503264/3355656
+  flex: 1 1 0px;
+  text-align: center;
+}
+
+.NavBoxTabItemSelected {
+  font: normal normal bold 14px/32px Noto Sans KR;
+  color: #191919;
+  position: relative;
+}
+
+.NavBoxTabItemSelected::before {
+  background: #191919 0% 0% no-repeat padding-box;
+  transition-duration: 500ms;
+  content: '';
+  display: block;
+  height: 2px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.NavBoxTabItemUnSelected {
+  position: relative;
+}
+
+.NavBoxTabItemUnSelected::before {
+  background: #f5f5f5 0% 0% no-repeat padding-box;
+  content: '';
+  display: block;
+  height: 2px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

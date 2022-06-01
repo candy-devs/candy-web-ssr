@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+
+.RankListItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font: normal normal 12px Noto Sans KR;
+  font-weight: 400;
+  // margin: 0 32px 0 0;
+  padding: 0 16px 0 16px;
+
+  .RankListLeading {
+    display: flex;
+    flex-direction: row;
+
+    .RankListLeadingName {
+      padding: 0 0 0 12px;
+    }
+  }
+
+  .RankListVariance {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    // .rank-list-variance-up {
+    //   // padding: 0 0 0 4px;
+    //   width: 0;
+    //   height: 0;
+    //   border-left: 6px solid transparent;
+    //   border-right: 6px solid transparent;
+    //   border-bottom: 12px solid #555;
+    //   border-radius: 3px;
+    // }
+
+    .RankListVarianceTriangle {
+      margin: 0 0 0 8px;
+      position: relative;
+      text-align: left;
+    }
+
+    .RankListVarianceTriangle:before,
+    .RankListVarianceTriangle:after {
+      content: '';
+      position: absolute;
+      background-color: inherit;
+    }
+
+    .RankListVarianceTriangle,
+    .RankListVarianceTriangle:before,
+    .RankListVarianceTriangle:after {
+      width: 5px;
+      height: 5px;
+      border-top-right-radius: 30%;
+    }
+
+    .RankListVarianceTriangleUp {
+      background-color: red;
+      transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+    }
+
+    .RankListVarianceTriangleUp:before {
+      transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+    }
+
+    .RankListVarianceTriangleUp:after {
+      transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+    }
+
+    .RankListVarianceTriangleDown {
+      background-color: blue;
+      transform: rotate(-240deg) skewX(-30deg) scale(1, .866);
+    }
+
+    .RankListVarianceTriangleDown:before {
+      transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+    }
+
+    .RankListVarianceTriangleDown:after {
+      transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+    }
+  }
+}
+
+.RankListPage {
+  width: var(--rank-list-page-width);
+  min-width: var(--rank-list-page-width);
+  max-width: var(--rank-list-page-width);
+}
+
+.RankListPage >div:not(:last-child)::after {
+  content: '';
+  display: block;
+  padding: 8px 0 0 0;
+}
+
+.RankList {
+  width: var(--rank-list-page-width);
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  scroll-behavior: smooth;
+
+  // overflow: auto;
+  overflow-x: scroll;
+  // padding-bottom: 17px;
+  // box-sizing: content-box;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: -17px;
+}
+
+.RankListWrapper {
+  // overflow: hidden;
+  overflow: hidden;
+  position: relative;
+  height: 150px;
+}
+
+.RankListWrapper * {
+  transition-duration: 0ms;
+}
+
+.RankListDots {
+  position: absolute;
+  width: 100%;
+  top: 130px;
+  display: flex;
+  justify-content: center;
+
+  * {
+    transition-duration: 300ms;
+  }
+
+  .RankListDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .RankListDot:not(:last-child) {
+    margin: 0 8px 0 0;
+  }
+
+  .Selected {
+    background-color: grey;
+  }
+
+  .UnSelected {
+    background-color: rgb(231, 231, 231);
+  }
+}
