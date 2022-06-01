@@ -1,0 +1,43 @@
+
+.BottomNavBox {
+  display: block;
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  z-index: 30;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+
+  // .bottom-nav-box-divider {
+  .BottomNavBoxDivider {
+    width: 100%;
+    height: 1px;
+    background-color: #f5f5f5;
+  }
+
+  // .bottom-nav-box-icons {
+  .BottomNavBoxIcons { 
+    // margin: 0 16px;
+    padding: 0 20px;
+    height: 42px;
+    // width: 100%;
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+
+    // .bottom-nav-box-icon {
+    .BottomNavBoxIcon {
+      flex:1;
+      text-align: center;
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    .Selected {
+      svg g path {
+        fill: black;
+      }
+    }
+  }
+}
