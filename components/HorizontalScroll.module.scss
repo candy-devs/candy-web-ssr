@@ -1,0 +1,21 @@
+.HorizontalScrollWrapper {
+  height: 100%;
+  overflow: hidden;
+  // width: 100%;
+  // overflow: scroll;
+  position: relative;
+
+  .HorizontalScroll {
+    display: flex;
+    flex-direction: row;
+    // width: 100%;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    bottom: -17px;
+    left: 0;
+    right: 0;
+    overflow-x: scroll;
+    padding: 0 16px 0 16px;
+  }
+}

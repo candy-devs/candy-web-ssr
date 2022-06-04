@@ -1,0 +1,32 @@
+.MyDivider {
+  height: 1px;
+  background: #f1f1f1 0% 0% no-repeat padding-box;
+  opacity: 1;
+  // width: 100%;
+}
+
+.MySettingPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: var(--my-setting-panel-height);
+}
+
+.MySettingPanelUp {
+  padding: 16px 16px 12px 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    transform: rotate(var(--my-setting-panel-down-rotate));
+    fill: #454c52;
+    width: 18px;
+    height: 18px;
+
+    line {
+      stroke-width: 4;
+    }
+  }
+}

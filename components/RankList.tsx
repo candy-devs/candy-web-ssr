@@ -74,7 +74,8 @@ export default function RankList() {
         "--rank-list-page-width",
         `${ref.current.getBoundingClientRect().width}px`
       );
-      scrollRef.current.scrollLeft = Math.round(onScrollLeft / width) * width;
+      if (scrollRef.current != null)
+       scrollRef.current.scrollLeft = Math.round(onScrollLeft / width) * width;
       setPageIndex(Math.round(onScrollLeft / width));
     }
   }, [ref, scrollRef, onScrollLeft, width]);
