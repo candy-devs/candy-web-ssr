@@ -9,9 +9,9 @@ import TabView from "../../components/TabView";
 const User: NextPage = () => {
   const [index, setIndex] = useState(0);
 
-  const onChange = function (index: number) {
+  const onChange = useCallback((index: number) => {
     setIndex(index);
-  };
+  }, []);
 
   const pages = [
     <div key={0} style={{ padding: "16px" }}>
@@ -20,7 +20,7 @@ const User: NextPage = () => {
       <ArticleHeaderItem />
     </div>,
     <div key={1}></div>,
-    <div key={2}></div>
+    <div key={2}></div>,
   ];
 
   return (

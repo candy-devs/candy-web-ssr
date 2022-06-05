@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import ArticleHeaderItem from "../../components/ArticleHeaderItem";
 import DivideSlim from "../../components/DivideSlim";
 import HorizontalScroll from "../../components/HorizontalScroll";
@@ -28,9 +28,9 @@ const My: NextPage = () => {
     );
   }, [ref, panelDown]);
 
-  const panelDownClick = function () {
+  const panelDownClick = useCallback(() => {
     setPanelDown(!panelDown);
-  };
+  }, [panelDown]);
 
   return (
     <NavigationLayout page={3}>
@@ -82,7 +82,7 @@ const My: NextPage = () => {
           </HorizontalScroll>
         </div>
       </div>
-      <DivideSlim/>
+      <DivideSlim />
       <div style={{ padding: "16px" }}>
         <ArticleHeaderItem />
         <ArticleHeaderItem />
