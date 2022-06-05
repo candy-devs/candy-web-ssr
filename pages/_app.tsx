@@ -2,6 +2,7 @@ import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
+import { wrapper } from '../store'
 
 // https://nextjs.org/docs/basic-features/layouts
 
@@ -20,4 +21,4 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(<Component {...pageProps} />)
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)
