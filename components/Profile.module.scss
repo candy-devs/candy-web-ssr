@@ -1,0 +1,57 @@
+.Profile {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 15px 24px 15px;
+
+  .ProfileThumbnail {
+    width: 60px;
+    height: 60px;
+    margin: 16px 29px;
+    border-radius: 6px;
+    background-color: #a2a5a9;
+  }
+
+  .ProfileStatus {
+    width: 155px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .ProfileStatusUnit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font: normal normal bold 14px Noto Sans KR;
+      color: #454c52;
+    }
+
+    .ProfilestatusFigure {
+      font-size: 10px;
+      color: #6b6f72;
+    }
+  }
+
+  .ProfileDescription {
+    padding: 24px 0;
+    font: normal normal bold 11px Noto Sans KR;
+    color: #454c52;
+  }
+
+  .ProfileFunctions {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .ProfileFunctionButton {
+      flex: 1;
+    }
+
+    .ProfileFunctionDivider {
+      width: 6px;
+    }
+  }
+}
