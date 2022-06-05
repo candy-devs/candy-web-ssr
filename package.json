@@ -15,15 +15,16 @@
     "next-redux-wrapper": "^7.0.5",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "redux-logger": "^3.0.6",
     "react-redux": "^8.0.2",
     "react-use": "^17.4.0",
+    "redux-logger": "^3.0.6",
     "styled-jsx": "^5.0.2"
   },
   "devDependencies": {
     "@types/node": "17.0.36",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
+    "@types/redux-logger": "^3.0.9",
     "eslint": "8.16.0",
     "eslint-config-next": "12.1.6",
     "sass": "^1.52.1",
