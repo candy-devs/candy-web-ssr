@@ -1,25 +1,46 @@
-import '../styles/globals.scss'
-import type { AppProps } from 'next/app'
-import { NextPage } from 'next'
-import { ReactElement, ReactNode } from 'react'
-import { wrapper } from '../store'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "../styles/globals.scss";
+import type { AppContext, AppProps } from "next/app";
+import { NextPage, NextPageContext } from "next";
+import { ReactElement, ReactNode } from "react";
+import { wrapper } from "../store";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import * as userActions from "../store/modules/user";
+import { UserDataType } from "../store/modules/user";
+import { Context } from "next-redux-wrapper";
 
 // https://nextjs.org/docs/basic-features/layouts
 
 type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode
-}
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
-}
+  Component: NextPageWithLayout;
+};
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+function MyApp({ Component, pageProps }: any) {
   // Use the layout defined at the page level, if available
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout ?? ((page: any) => page);
 
-  return getLayout(<Component {...pageProps} />)
+  return getLayout(<Component {...pageProps} />);
 }
 
-export default wrapper.withRedux(MyApp)
+MyApp.getInitialProps = wrapper.getInitialPageProps(
+  (store) =>
+    async (ctx: any) => {
+      const cookie = ctx?.ctx?.req?.headers?.cookie;
+      if (cookie !== undefined) {
+        const uinfo = await axios.get("http://localhost:8080/user/mysinfo", {
+          headers: {
+            cookie: cookie!,
+          },
+        });
+        if (uinfo.data != "") store.dispatch(userActions.set(uinfo.data));
+      }
+
+      return {};
+    }
+);
+
+export default wrapper.withRedux(MyApp);

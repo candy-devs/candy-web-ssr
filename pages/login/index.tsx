@@ -70,19 +70,19 @@ export default function LoginPage() {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, res, ...etc }) => {
-      if (req.cookies["SESSION"] != null) {
-        const uinfo = await axios.get("http://localhost:8080/user/mysinfo", {
-          headers: {
-            cookie: `SESSION=${req.cookies["SESSION"]}`,
-          },
-        });
-        if (uinfo.data != "") store.dispatch(userActions.set(uinfo.data));
-      }
-      return {
-        props: {},
-      };
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req, res, ...etc }) => {
+//       if (req.cookies["SESSION"] != null) {
+//         const uinfo = await axios.get("http://localhost:8080/user/mysinfo", {
+//           headers: {
+//             cookie: `SESSION=${req.cookies["SESSION"]}`,
+//           },
+//         });
+//         if (uinfo.data != "") store.dispatch(userActions.set(uinfo.data));
+//       }
+//       return {
+//         props: {},
+//       };
+//     }
+// );
