@@ -1,3 +1,4 @@
+import axios from "axios";
 import { NextResponse, NextRequest, NextFetchEvent } from "next/server";
 
 export async function middleware(req: NextRequest): Promise<NextResponse> {

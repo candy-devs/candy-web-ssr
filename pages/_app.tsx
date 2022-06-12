@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 import { wrapper } from '../store'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // https://nextjs.org/docs/basic-features/layouts
 

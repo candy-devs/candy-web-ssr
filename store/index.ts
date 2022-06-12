@@ -6,10 +6,10 @@ import reducer from './modules';
 
 const makeStore = (context: any) => configureStore({ 
     reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
     devTools: process.env.NODE_ENV !== 'production',
 });
 
 export const wrapper = createWrapper(makeStore, {
-    debug: process.env.NODE_ENV !== 'production',
+    // debug: process.env.NODE_ENV !== 'production',
 });
