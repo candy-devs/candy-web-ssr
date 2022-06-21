@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import BottomSheet from '../components/BottomSheet';
 import * as counterActions from '../store/modules/counter';
 
 export default function Test() {
@@ -20,6 +21,7 @@ export default function Test() {
             <button onClick={() => minus({ value })}>-</button>
             <span>{value}</span>
             <button onClick={() => plus({ value })}>+</button>
+            <BottomSheet/>
         </div>
     );
 }

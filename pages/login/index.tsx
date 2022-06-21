@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { wrapper } from "../../store";
 import * as userActions from "../../store/modules/user";
 import { UserDataType } from "../../store/modules/user";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const loginPage = "http://localhost:8080/user/login";
 

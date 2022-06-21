@@ -3,11 +3,8 @@ import type { AppContext, AppProps } from "next/app";
 import { NextPage, NextPageContext } from "next";
 import { ReactElement, ReactNode } from "react";
 import { wrapper } from "../store";
-import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import * as userActions from "../store/modules/user";
-import { UserDataType } from "../store/modules/user";
-import { Context } from "next-redux-wrapper";
 
 // https://nextjs.org/docs/basic-features/layouts
 
