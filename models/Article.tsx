@@ -1,38 +1,47 @@
 export interface ArticleAttributes {
-  title?: string;
-  body?: string;
-  upvote?: number;
-  view?: number;
-  board?: number;
-  user_id?: number;
+  id: number;
+  title: string;
+  author: string;
+  summary: string;
+  up: number;
+  down: number;
+  view: number;
 }
 
 export class ArticleModel implements ArticleAttributes {
-  title?: string;
-  body?: string;
-  upvote?: number;
-  view?: number;
-  board?: number;
-  user_id?: number;
+  id: number;
+  title: string;
+  author: string;
+  summary: string;
+  up: number;
+  down: number;
+  view: number;
 
   constructor(params: Partial<ArticleAttributes>) {
-    this.title = params.title;
-    this.body = params.body;
-    this.upvote = params.upvote;
-    this.view = params.view;
-    this.board = params.board;
-    this.user_id = params.user_id;
+  this.id= params.id!;
+  this.title= params.title!;
+  this.author= params.author!;
+  this.summary= params.summary!;
+  this.up= params.up!;
+  this.down= params.down!;
+  this.view= params.view!;
   }
 
-  factory({
-    title,
-    body,
-    upvote,
-    view,
-    board,
-    user_id,
+  factory({  id,
+  title,
+  author,
+  summary,
+  up,
+  down,
+  view,
   }: Partial<ArticleAttributes>) {
-    return new ArticleModel({ title, body, upvote, view, board, user_id });
+    return new ArticleModel({  id,
+  title,
+  author,
+  summary,
+  up,
+  down,
+  view, });
   }
 
   fromJSON () {

@@ -28,7 +28,7 @@ MyApp.getInitialProps = wrapper.getInitialPageProps(
     async (ctx: any) => {
       const cookie = ctx?.ctx?.req?.headers?.cookie;
       if (cookie !== undefined) {
-        const uinfo = await axios.get("http://localhost:8080/user/mysinfo", {
+        const uinfo = await axios.get("http://localhost:8080/api/user/mysinfo", {
           headers: {
             cookie: cookie!,
           },
