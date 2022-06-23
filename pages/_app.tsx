@@ -35,9 +35,7 @@ MyApp.getInitialProps = wrapper.getInitialPageProps(
       if (uinfo.data != "") store.dispatch(userActions.set(uinfo.data));
     }
 
-    return {
-      props: {},
-    };
+    return {};
   }
 );
 
