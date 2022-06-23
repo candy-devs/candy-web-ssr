@@ -8,18 +8,27 @@ const iconArrowLeft = (
   </svg>
 );
 
-export default function AppBar() {
+type AppBarProps = {
+  title: String;
+  showUnderLine?: boolean;
+};
+
+export default function AppBar({ title, showUnderLine }: AppBarProps) {
   return (
     <>
       <div className={styles.AppBar}>
-        <div className={styles.AppBarLeading}><BackIcon/></div>
+        <div className={styles.AppBarLeading}>
+          <BackIcon />
+        </div>
 
-        <div className={styles.AppBarTitle}>닉네임_가나다라마바사</div>
+        <div className={styles.AppBarTitle}>{title}</div>
 
         <div className={styles.AppBarTailing}>&#8942;</div>
       </div>
 
-      <div className={styles.AppBarTitle} />
+      {/* <div className={styles.AppBarTitle} /> */}
+
+      {showUnderLine ? <div className={styles.AppBarUnderLine}></div> : null}
     </>
   );
 }

@@ -27,7 +27,7 @@ const User: NextPage = () => {
     <>
       <BottomNavigation selected={4} />
       <div className="user-tab">
-        <AppBar />
+        <AppBar title={"아이디_ASDFASDF"} />
         <Profile />
         <TabView items={["게시글", "댓글", "방명록"]} onChange={onChange} />
         {pages[index]}

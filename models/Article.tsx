@@ -18,33 +18,26 @@ export class ArticleModel implements ArticleAttributes {
   view: number;
 
   constructor(params: Partial<ArticleAttributes>) {
-  this.id= params.id!;
-  this.title= params.title!;
-  this.author= params.author!;
-  this.summary= params.summary!;
-  this.up= params.up!;
-  this.down= params.down!;
-  this.view= params.view!;
+    this.id = params.id!;
+    this.title = params.title!;
+    this.author = params.author!;
+    this.summary = params.summary!;
+    this.up = params.up!;
+    this.down = params.down!;
+    this.view = params.view!;
   }
 
-  factory({  id,
-  title,
-  author,
-  summary,
-  up,
-  down,
-  view,
+  factory({
+    id,
+    title,
+    author,
+    summary,
+    up,
+    down,
+    view,
   }: Partial<ArticleAttributes>) {
-    return new ArticleModel({  id,
-  title,
-  author,
-  summary,
-  up,
-  down,
-  view, });
+    return new ArticleModel({ id, title, author, summary, up, down, view });
   }
 
-  fromJSON () {
-    
-  }
+  fromJSON() {}
 }
