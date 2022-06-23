@@ -11,6 +11,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AppBar from "../../components/AppBar";
 import styles from "./index.module.scss";
 import styled, { css } from "styled-components";
+import useUser from "../../api/UserApi";
+import useSWR, { SWRConfig } from "swr";
 // import styled from "styled-components";
 
 // const loginPage = "http://localhost:8080/user/login";

@@ -24,20 +24,21 @@ function MyApp({ Component, pageProps }: any) {
 }
 
 MyApp.getInitialProps = wrapper.getInitialPageProps(
-  (store) =>
-    async (ctx: any) => {
-      const cookie = ctx?.ctx?.req?.headers?.cookie;
-      if (cookie !== undefined) {
-        const uinfo = await axios.get("http://localhost:8080/api/user/mysinfo", {
-          headers: {
-            cookie: cookie!,
-          },
-        });
-        if (uinfo.data != "") store.dispatch(userActions.set(uinfo.data));
-      }
-
-      return {};
+  (store) => async (ctx: any) => {
+    const cookie = ctx?.ctx?.req?.headers?.cookie;
+    if (cookie !== undefined) {
+      const uinfo = await axios.get("http://localhost:8080/api/user/mysinfo", {
+        headers: {
+          cookie: cookie!,
+        },
+      });
+      if (uinfo.data != "") store.dispatch(userActions.set(uinfo.data));
     }
+
+    return {
+      props: {},
+    };
+  }
 );
 
 export default wrapper.withRedux(MyApp);
