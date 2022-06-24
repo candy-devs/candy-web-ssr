@@ -27,7 +27,7 @@ export class ArticleModel implements ArticleAttributes {
     this.view = params.view!;
   }
 
-  factory({
+  static factory({
     id,
     title,
     author,

@@ -1,20 +1,21 @@
 import useSWR from "swr";
+import { ArticleModel } from "../models/Article";
 import { ApiReturnType, fetcher } from "./ApiInterface";
 
-export type UserDataType = {
+export type ArticleDataType = {
   name: string;
   email: string;
   picture: string;
 };
 
-export default function useUser(): ApiReturnType<UserDataType> {
-  const { data, error } = useSWR(`/api/user/mysinfo`, fetcher, {
+export default function useArticle(id: number): ApiReturnType<ArticleModel> {
+  const { data, error } = useSWR(`/api/article/read/${id}`, fetcher, {
     revalidateOnFocus: false,
     revalidateOnMount: false,
   });
 
   return {
-    data: data,
+    data: ArticleModel.factory(data),
     isLoading: !error && !data,
     isError: error,
   };
