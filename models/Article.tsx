@@ -17,7 +17,6 @@ export class ArticleModel implements ArticleAttributes {
   up: number;
   down: number;
   view: number;
-  thumbnail: string;
   authorImage: string;
 
   constructor(params: Partial<ArticleAttributes>) {
