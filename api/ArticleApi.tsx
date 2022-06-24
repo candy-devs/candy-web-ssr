@@ -8,8 +8,8 @@ export type ArticleDataType = {
   picture: string;
 };
 
-export default function useArticle(id: number): ApiReturnType<ArticleModel> {
-  const { data, error } = useSWR(`/api/article/read/${id}`, fetcher, {
+export default function useArticle(id: string): ApiReturnType<ArticleModel> {
+  const { data, error } = useSWR(`/api/article/read?id=${id}`, fetcher, {
     revalidateOnFocus: false,
     revalidateOnMount: false,
   });

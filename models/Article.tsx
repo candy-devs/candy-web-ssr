@@ -6,6 +6,7 @@ export interface ArticleAttributes {
   up: number;
   down: number;
   view: number;
+  authorImage: string;
 }
 
 export class ArticleModel implements ArticleAttributes {
@@ -16,6 +17,8 @@ export class ArticleModel implements ArticleAttributes {
   up: number;
   down: number;
   view: number;
+  thumbnail: string;
+  authorImage: string;
 
   constructor(params: Partial<ArticleAttributes>) {
     this.id = params.id!;
@@ -25,6 +28,7 @@ export class ArticleModel implements ArticleAttributes {
     this.up = params.up!;
     this.down = params.down!;
     this.view = params.view!;
+    this.authorImage = params.authorImage!;
   }
 
   static factory({
@@ -35,8 +39,18 @@ export class ArticleModel implements ArticleAttributes {
     up,
     down,
     view,
+    authorImage,
   }: Partial<ArticleAttributes>) {
-    return new ArticleModel({ id, title, author, summary, up, down, view });
+    return new ArticleModel({
+      id,
+      title,
+      author,
+      summary,
+      up,
+      down,
+      view,
+      authorImage,
+    });
   }
 
   fromJSON() {}
