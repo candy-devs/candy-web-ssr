@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { ArticleModel } from "../models/Article";
 import { ApiReturnType, fetcher } from "./ApiInterface";
 
-export default function useArticle(
+export default function useBoardArticles(
   boardKey: string,
   page: number
 ): ApiReturnType<[ArticleModel]> {

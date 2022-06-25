@@ -1,3 +1,5 @@
+/* this header class used only want to show articles regardness of boardKey */
+
 export interface ArticleHeaderAttributes {
   id: number;
   title: string;
