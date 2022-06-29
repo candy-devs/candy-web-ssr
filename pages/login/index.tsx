@@ -138,17 +138,6 @@ const LoginTextBox = styled.input<LoginTextBoxProps>`
 `;
 
 const LoginButton = styled.input`
-  /* height: 31px;
-  border-radius: 10px;
-  background-color: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-  width: 100%;
-  font: normal normal bold 12px Noto Sans KR;
-  color: #6b6f72; */
   border: none;
   outline: none;
   background: none;
