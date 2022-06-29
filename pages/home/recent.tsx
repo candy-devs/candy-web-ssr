@@ -8,6 +8,7 @@ import Divide from "../../components/Divide";
 import NavigationLayout from "../../components/layouts/NavigationLayout";
 import SelectButton from "../../components/SelectButton";
 import { ArticleModel } from "../../models/Article";
+import { ArticleHeaderModel } from "../../models/ArticleHeaderModel";
 
 type ArticlesProps = {
   articles: [ArticleModel];
@@ -23,13 +24,9 @@ const Recent = () => {
         <SelectButton content="게시판 · 태그 선택" />
       </div>
       <div style={{ padding: "0 16px 16px 16px" }}>
-        {data.map((s, index) => (
-          <div key={index}>{JSON.stringify(s)}</div>
+        {data.map((article, index) => (
+          <ArticleHeaderItem key={index} article={article} />
         ))}
-
-        {/* <ArticleHeaderItem />
-        <ArticleHeaderItem />
-        <ArticleHeaderItem /> */}
       </div>
     </NavigationLayout>
   );
