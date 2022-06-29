@@ -3,10 +3,9 @@ import { ArticleHeaderModel } from "../models/ArticleHeaderModel";
 import { ApiReturnType, fetcher } from "./ApiInterface";
 
 export default function useRecentArticles(
-  boardKey: string,
   page: number
 ): ApiReturnType<[ArticleHeaderModel]> {
-  const { data, error } = useSWR(`/api/v1/article/recent`, fetcher, {
+  const { data, error } = useSWR(`/api/v1/article/recent?p=${page}`, fetcher, {
     revalidateOnFocus: false,
   });
 
