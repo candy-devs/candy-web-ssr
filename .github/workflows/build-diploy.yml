@@ -28,3 +28,4 @@ jobs:
         with:
           url: ${{ secrets.WEBHOOK_URL }}
           method: "POST"
+          timeout: 60000
