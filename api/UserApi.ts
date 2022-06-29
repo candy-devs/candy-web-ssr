@@ -8,7 +8,7 @@ export type UserDataType = {
 };
 
 export default function useUser(): ApiReturnType<UserDataType> {
-  const { data, error } = useSWR(`/api/user/mysinfo`, fetcher, {
+  const { data, error } = useSWR(`/api/v1/user/info`, fetcher, {
     revalidateOnFocus: false,
     revalidateOnMount: false,
   });

@@ -7,7 +7,7 @@ export default function useBoardArticles(
   page: number
 ): ApiReturnType<[ArticleModel]> {
   const { data, error } = useSWR(
-    `/api/board/articles?id=${boardKey}&p=${page}`,
+    `/api/v1/board/articles?id=${boardKey}&p=${page}`,
     fetcher,
     {
       revalidateOnFocus: false,
