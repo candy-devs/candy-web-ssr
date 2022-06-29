@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiPrefix } from "../config/ApiConfig";
 
 export type ApiReturnType<T> = {
   data: T;
@@ -7,7 +8,4 @@ export type ApiReturnType<T> = {
 };
 
 export const fetcher = (url: string) =>
-  axios.get(url).then((res) => {
-    console.log(res);
-    return res.data;
-  });
+  axios.get(`${apiPrefix}${url}`).then((res) => res.data);

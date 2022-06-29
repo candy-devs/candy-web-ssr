@@ -15,3 +15,12 @@ export default function useRecentArticles(
     isError: error,
   };
 }
+
+export async function getRecentArticles(page: number) {
+  const url = `/api/v1/article/recent?p=${page}`;
+  const data = await fetcher(url);
+
+  return {
+    [url]: data,
+  };
+}
