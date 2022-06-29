@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import { apiPrefix } from "../config/ApiConfig";
 import { ArticleHeaderModel } from "../models/ArticleHeaderModel";
 import { ApiReturnType, fetcher } from "./ApiInterface";
 
@@ -17,10 +18,10 @@ export default function useRecentArticles(
 }
 
 export async function getRecentArticles(page: number) {
-  const url = `/api/v1/article/recent?p=${page}`;
-  const data = await fetcher(url);
+  const postfix = `/api/v1/article/recent?p=${page}`;
+  const data = await fetcher(`${apiPrefix}${postfix}`);
 
   return {
-    [url]: data,
+    [postfix]: data,
   };
 }
