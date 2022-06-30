@@ -2,6 +2,8 @@ import styles from "./ArticleHeaderItem.module.scss";
 import React from "react";
 import { ChatIcon, HeartIcon, ThumbUpIcon } from "./Icons";
 import { ArticleHeaderModel } from "../models/ArticleHeaderModel";
+import Moment from "react-moment";
+import "moment-timezone";
 
 type ArticleHeaderItemType = {
   article?: Required<ArticleHeaderModel>;
@@ -42,7 +44,9 @@ export default function ArticleHeaderItem({ article }: ArticleHeaderItemType) {
         <p>
           {article?.board}
           <span>&#183;</span>
-          2시간 전
+          <Moment locale="ko" fromNow>
+            {article?.writeTime}
+          </Moment>
         </p>
         <div className={styles.ArticleHeaderItemStatus}>
           <div className={styles.ArticleHeaderItemStat}>
