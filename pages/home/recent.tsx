@@ -9,7 +9,6 @@ import Divide from "../../components/Divide";
 import NavigationLayout from "../../components/layouts/NavigationLayout";
 import SelectButton from "../../components/SelectButton";
 import { ArticleModel } from "../../models/Article";
-import { ArticleHeaderModel } from "../../models/ArticleHeaderModel";
 
 type ArticlesProps = {
   articles: [ArticleModel];

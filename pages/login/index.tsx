@@ -164,6 +164,11 @@ const LoginButton = styled.input`
   }
 `;
 
+const naverOAuth2 = "/oauth2/authorization/naver";
+const kakaoOAuth2 = "/oauth2/authorization/kakao";
+const facebookOAuth2 = "/oauth2/authorization/facebook";
+const googleOAuth2 = "/oauth2/authorization/google";
+
 export default function LoginPage() {
   const user: UserDataType = useSelector(({ user }: any) => user);
 

@@ -1,56 +1,17 @@
-export interface ArticleAttributes {
+export interface ArticleModel {
   id: number;
   title: string;
   author: string;
-  summary: string;
+  body: string;
   up: number;
   down: number;
   view: number;
+  thumbnail: string;
   authorImage: string;
-}
-
-export class ArticleModel implements ArticleAttributes {
-  id: number;
-  title: string;
-  author: string;
-  summary: string;
-  up: number;
-  down: number;
-  view: number;
-  authorImage: string;
-
-  constructor(params: Partial<ArticleAttributes>) {
-    this.id = params.id!;
-    this.title = params.title!;
-    this.author = params.author!;
-    this.summary = params.summary!;
-    this.up = params.up!;
-    this.down = params.down!;
-    this.view = params.view!;
-    this.authorImage = params.authorImage!;
-  }
-
-  static factory({
-    id,
-    title,
-    author,
-    summary,
-    up,
-    down,
-    view,
-    authorImage,
-  }: Partial<ArticleAttributes>) {
-    return new ArticleModel({
-      id,
-      title,
-      author,
-      summary,
-      up,
-      down,
-      view,
-      authorImage,
-    });
-  }
-
-  fromJSON() {}
+  tags: [string];
+  board: string;
+  writeTime: Date;
+  updateTime: Date;
+  comments: number;
+  bookmark: number;
 }

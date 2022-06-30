@@ -1,11 +1,10 @@
 import styles from "./ArticleHeaderItem.module.scss";
 import React from "react";
-import { ArticleAttributes } from "../models/Article";
 import { ChatIcon, HeartIcon, ThumbUpIcon } from "./Icons";
-import { ArticleHeaderAttributes } from "../models/ArticleHeaderModel";
+import { ArticleHeaderModel } from "../models/ArticleHeaderModel";
 
 type ArticleHeaderItemType = {
-  article?: Required<ArticleHeaderAttributes>;
+  article?: Required<ArticleHeaderModel>;
 };
 
 export default function ArticleHeaderItem({ article }: ArticleHeaderItemType) {
