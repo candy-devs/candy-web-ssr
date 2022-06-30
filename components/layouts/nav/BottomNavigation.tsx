@@ -3,6 +3,7 @@ import React, { ReactElement, useState } from "react";
 import { HomeIcon, SearchIcon, PencilIcon, HeartBreakIcon } from "../../Icons";
 import ProfileImageSmall from "../../ProfileImageSmall";
 import styles from "./BottomNavigation.module.scss";
+import "moment/locale/ko";
 
 type BottomNavigationProps = {
   selected: number;
