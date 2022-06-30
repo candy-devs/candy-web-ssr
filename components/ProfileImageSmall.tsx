@@ -22,7 +22,7 @@ export default function ProfileImageSmall() {
     return <ProfileNullImage />;
   } else {
     return (
-      <ProfileImage src={user.picture} alt={"profile"} width={28} height={28} />
+      <ProfileImage src={user.picture} alt={"profile"} width={24} height={24} />
     );
   }
 }
