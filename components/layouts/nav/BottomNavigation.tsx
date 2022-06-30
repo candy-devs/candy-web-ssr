@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { ReactElement, useState } from "react";
 import { HomeIcon, SearchIcon, PencilIcon, HeartBreakIcon } from "../../Icons";
+import ProfileImageSmall from "../../ProfileImageSmall";
 import styles from "./BottomNavigation.module.scss";
 
 type BottomNavigationProps = {
@@ -17,7 +18,7 @@ export default function BottomNavigationLayout({
     <SearchIcon key={1} />,
     <PencilIcon key={2} />,
     <HeartBreakIcon key={3} />,
-    <HomeIcon key={4} />,
+    <ProfileImageSmall key={4} />,
   ];
 
   const route = ["/", "/search", "/write", "/bookmark", "/profile"];
