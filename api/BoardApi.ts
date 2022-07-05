@@ -16,7 +16,7 @@ export default function useBoardArticles(
   );
 
   return {
-    data: data["articles"] as [ArticleModel],
+    data: data != null ? (data["articles"] as [ArticleModel]) : null,
     isLoading: !error && !data,
     isError: error,
   };

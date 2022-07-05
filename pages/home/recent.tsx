@@ -43,9 +43,13 @@ function ArticleArea() {
 
   return (
     <div style={{ padding: "0 16px 16px 16px" }}>
-      {data.map((article, index) => (
-        <ArticleHeaderItem key={index} article={article} />
-      ))}
+      {data != null ? (
+        data.map((article, index) => (
+          <ArticleHeaderItem key={index} article={article} />
+        ))
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

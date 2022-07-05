@@ -11,7 +11,7 @@ export default function useRecentArticles(
   });
 
   return {
-    data: data["articles"] as [ArticleHeaderModel],
+    data: data != null ? (data["articles"] as [ArticleHeaderModel]) : null,
     isLoading: !error && !data,
     isError: error,
   };
