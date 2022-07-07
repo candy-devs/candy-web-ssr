@@ -175,25 +175,27 @@ export default function LoginPage() {
   return (
     <SSRProvider>
       <AppBar title={"로그인"} showUnderLine={true} />
-      <div className={styles.LoginLogoBox}>
-        <div className={styles.LoginLogo}>CANDY</div>
-        <LoginTextBox
-          type="text"
-          id="id"
-          name="id"
-          required
-          placeholder="이메일 또는 휴대전화"
-        />
-        <LoginTextBox
-          type="password"
-          id="password"
-          name="password"
-          required
-          isPassword
-          placeholder="비밀번호"
-        />
-        <LoginButton type="button" value={"로그인"} />
-      </div>
+      <form action="/api/v1/auth/login" method="post">
+        <div className={styles.LoginLogoBox}>
+          <div className={styles.LoginLogo}>CANDY</div>
+          <LoginTextBox
+            type="text"
+            id="id"
+            name="id"
+            required
+            placeholder="이메일 또는 휴대전화"
+          />
+          <LoginTextBox
+            type="password"
+            id="password"
+            name="pw"
+            required
+            isPassword
+            placeholder="비밀번호"
+          />
+          <LoginButton type="submit" value={"로그인"} />
+        </div>
+      </form>
     </SSRProvider>
   );
 }
