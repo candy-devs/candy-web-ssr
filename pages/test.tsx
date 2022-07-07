@@ -2,7 +2,7 @@ import axios from "axios";
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import BottomSheet from "../components/BottomSheet";
-import { apiPrefix } from "../config/ApiConfig";
+import { apiPrefixClient } from "../config/ApiConfig";
 import * as counterActions from "../store/modules/counter";
 
 export default function Test() {
@@ -24,7 +24,7 @@ export default function Test() {
   );
 
   const postButton = useCallback(async () => {
-    const res = await axios.post(`${apiPrefix}/api/v1/hello`);
+    const res = await axios.post(`${apiPrefixClient}/api/v1/hello`);
     console.log(res.data);
   }, []);
 
