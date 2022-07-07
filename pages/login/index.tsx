@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import { Context } from "next-redux-wrapper";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form, SSRProvider } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { wrapper } from "../../store";
@@ -12,6 +12,8 @@ import AppBar from "../../components/AppBar";
 import styles from "./index.module.scss";
 import styled, { css } from "styled-components";
 import SelectButton from "../../components/SelectButton";
+import { Router, useRouter } from "next/router";
+import { getSortedRoutes } from "next/dist/shared/lib/router/utils";
 
 // const loginPage = "http://localhost:8080/user/login";
 
@@ -164,13 +166,37 @@ const LoginButton = styled.input`
   }
 `;
 
+const FailBox = styled.p`
+  width: 320px;
+  padding-top: 8px;
+  font-size: 14px;
+  color: red;
+`;
+
 const naverOAuth2 = "/oauth2/authorization/naver";
 const kakaoOAuth2 = "/oauth2/authorization/kakao";
 const facebookOAuth2 = "/oauth2/authorization/facebook";
 const googleOAuth2 = "/oauth2/authorization/google";
 
-export default function LoginPage() {
+export default function LoginPage({ referer }: any) {
+  const router = useRouter();
   const user: UserDataType = useSelector(({ user }: any) => user);
+  const [isFail, setIsFail] = useState(false);
+  const [redirect, setRedirect] = useState(referer);
+
+  useEffect(() => {
+    if (user.name != "") {
+      router.back();
+    }
+    if (router.query["result"] !== undefined) {
+      if (parseInt(router.query["result"] as string) === 0) {
+        router.push(redirect);
+      } else {
+        setIsFail(true);
+      }
+    } else {
+    }
+  }, [redirect, router, setIsFail, user.name]);
 
   return (
     <SSRProvider>
@@ -178,6 +204,7 @@ export default function LoginPage() {
       <form action="/api/v1/auth/login" method="post">
         <div className={styles.LoginLogoBox}>
           <div className={styles.LoginLogo}>CANDY</div>
+          <input type="hidden" id="redirect" value={referer} />
           <LoginTextBox
             type="text"
             id="id"
@@ -193,9 +220,18 @@ export default function LoginPage() {
             isPassword
             placeholder="비밀번호"
           />
+          {isFail ? <FailBox>아이디 또는 비밀번호가 다릅니다!</FailBox> : null}
           <LoginButton type="submit" value={"로그인"} />
         </div>
       </form>
     </SSRProvider>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  return {
+    props: {
+      referer: context.req.headers.referer,
+    },
+  };
 }
