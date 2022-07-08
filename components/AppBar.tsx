@@ -1,4 +1,5 @@
 import React from "react";
+import styled, { css } from "styled-components";
 import styles from "./AppBar.module.scss";
 import { BackIcon } from "./Icons";
 
@@ -11,9 +12,14 @@ const iconArrowLeft = (
 type AppBarProps = {
   title: String;
   showUnderLine?: boolean;
+  alignCenter?: boolean;
 };
 
-export default function AppBar({ title, showUnderLine }: AppBarProps) {
+export default function AppBar({
+  title,
+  showUnderLine,
+  alignCenter,
+}: AppBarProps) {
   return (
     <>
       <div className={styles.AppBar}>
@@ -21,14 +27,31 @@ export default function AppBar({ title, showUnderLine }: AppBarProps) {
           <BackIcon />
         </div>
 
-        <div className={styles.AppBarTitle}>{title}</div>
+        <AppBarTitle alignCenter={alignCenter !== undefined && alignCenter}>
+          {title}
+        </AppBarTitle>
 
         <div className={styles.AppBarTailing}>&#8942;</div>
       </div>
-
-      {/* <div className={styles.AppBarTitle} /> */}
 
       {showUnderLine ? <div className={styles.AppBarUnderLine}></div> : null}
     </>
   );
 }
+
+type AppBarTitleProps = {
+  alignCenter: boolean;
+};
+
+const AppBarTitle = styled.div<AppBarTitleProps>`
+  flex: 1;
+  color: #454c52;
+  font: normal normal bold 14px Noto Sans KR;
+  padding: 0 0 0 ${(props) => (props.alignCenter ? "" : "")};
+
+  ${(props) =>
+    props.alignCenter &&
+    css`
+      text-align: center;
+    `};
+`;
