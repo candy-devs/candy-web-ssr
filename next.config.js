@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
 
   // async redirects() {
   //   return [
@@ -13,7 +14,7 @@ const nextConfig = {
   // }
   experimental: {
     outputStandalone: true,
-  }
-}
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
