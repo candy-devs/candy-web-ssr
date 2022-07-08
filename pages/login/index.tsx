@@ -15,89 +15,54 @@ import SelectButton from "../../components/SelectButton";
 import { Router, useRouter } from "next/router";
 import { getSortedRoutes } from "next/dist/shared/lib/router/utils";
 
-// const loginPage = "http://localhost:8080/user/login";
+export default function LoginPage({ referer }: any) {
+  const router = useRouter();
+  const user: UserDataType = useSelector(({ user }: any) => user);
+  const [isFail, setIsFail] = useState(false);
+  const [redirect, setRedirect] = useState(referer);
 
-// export default function LoginPage() {
-//   const user: UserDataType = useSelector(({ user }: any) => user);
+  useEffect(() => {
+    if (user.name != "") {
+      router.back();
+    }
 
-//   return (
-//     <div>
-//       <SSRProvider>
-//         <Container style={{ display: "block", padding: "32px 0 0 0" }}>
-//           <div>
-//             <div>E-Mail: {user.email}</div>
-//             <div>Name: {user.name}</div>
-//             <div>Picture: {user.picture}</div>
-//           </div>
-//           {/* <Form method="post" action="http://localhost:8080/login"> */}
-//           {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-//             <Form.Label>Email address</Form.Label>
-//             <Form.Control
-//               type="text"
-//               name="username"
-//               placeholder="Enter email"
-//               value={user.name}
-//             />
-//           </Form.Group>
+    if (router.query["result"] !== undefined) {
+      setIsFail(true);
+      setRedirect(router.query["redirect"]);
+    }
+  }, [redirect, router, setIsFail, user.name]);
 
-//           <Form.Group className="mb-3" controlId="formBasicPassword">
-//             <Form.Label>Password</Form.Label>
-//             <Form.Control
-//               type="password"
-//               name="password"
-//               placeholder="Password"
-//             />
-//           </Form.Group>
-//           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-//             <Form.Check type="checkbox" label="Check me out" />
-//           </Form.Group> */}
-//           <Button
-//             onClick={() => {
-//               axios.post(loginPage, {
-//                 id: "candy_test",
-//                 pw: "candy-test-pw",
-//               }).then(() => {
-//                 window.location.reload();
-//               });
-
-//             }}
-//           >
-//             Submit
-//           </Button>
-//           {/* </Form> */}
-
-//           <div>
-//             <a href="http://localhost:8080/oauth2/authorization/google">
-//               OAuth Google
-//             </a>
-//           </div>
-//         </Container>
-//       </SSRProvider>
-//     </div>
-//   );
-// }
-
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) =>
-//     async ({ req, res, ...etc }) => {
-//       if (req.cookies["SESSION"] != null) {
-//         const uinfo = await axios.get("http://localhost:8080/user/mysinfo", {
-//           headers: {
-//             cookie: `SESSION=${req.cookies["SESSION"]}`,
-//           },
-//         });
-//         if (uinfo.data != "") store.dispatch(userActions.set(uinfo.data));
-//       }
-//       return {
-//         props: {},
-//       };
-//
-// );
-
-// const loginTextBox = styled.input`
-//   border: none;
-//   outline: none;
-// `;
+  return (
+    <SSRProvider>
+      <AppBar title={"로그인"} showUnderLine={true} />
+      <div className={styles.LoginLogoBox}>
+        <div className={styles.LoginLogo}>CANDY</div>
+        <LoginForm action="/api/v1/auth/login" method="post">
+          <input type="hidden" id="redirect" value={redirect} />
+          <LoginTextBox
+            type="text"
+            id="id"
+            name="id"
+            required
+            placeholder="이메일 또는 휴대전화"
+          />
+          <LoginTextBox
+            type="password"
+            id="password"
+            name="pw"
+            required
+            isPassword
+            placeholder="비밀번호"
+          />
+          {isFail ? <FailBox>아이디 또는 비밀번호가 다릅니다!</FailBox> : null}
+          <LoginButton type="submit" value={"로그인"} />
+        </LoginForm>
+        <SplitBarLine>{"소셜 로그인"}</SplitBarLine>
+        <SocialButtons />
+      </div>
+    </SSRProvider>
+  );
+}
 
 const customMediaQuery = (maxWidth: number): string => {
   return `@media (max-width: ${maxWidth}px)`;
@@ -146,7 +111,8 @@ const LoginButton = styled.input`
 
   width: 320px;
   height: 38px;
-  margin: 25px 20px 30px;
+  /* margin: 25px 20px 30px; */
+  margin-top: 25px;
   padding: 10px 25px;
   border-radius: 5px;
   background-color: #5673eb;
@@ -173,55 +139,85 @@ const FailBox = styled.p`
   color: red;
 `;
 
+const LoginForm = styled.form`
+  width: 320px;
+`;
+
+const SplitBarLine = styled.div`
+  display: flex;
+  width: 320px;
+  flex-basis: 100%;
+  align-items: center;
+  color: #454c52;
+  margin: 30px 0 20px 0;
+  font-family: NotoSansCJKKR;
+  font-size: 12px;
+  font-weight: 500;
+
+  &:before {
+    content: "";
+    flex-grow: 1;
+    background: #f1f1f1;
+    height: 1px;
+    font-size: 0;
+    line-height: 0;
+    margin-right: 8px;
+  }
+
+  &:after {
+    content: "";
+    flex-grow: 1;
+    background: #f1f1f1;
+    height: 1px;
+    font-size: 0;
+    line-height: 0;
+    margin-left: 8px;
+  }
+`;
+
+const SocialDiv = styled.div`
+  display: flex;
+  width: 320px;
+  justify-content: space-around;
+`;
+
+type CircleProps = {
+  bcolor?: string;
+  bimage?: string;
+};
+
+const Circle = styled.a<CircleProps>`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  ${(props) =>
+    props.bcolor !== "" &&
+    css`
+      background-color: ${props.bcolor};
+    `};
+  ${(props) =>
+    props.bimage !== "" &&
+    css`
+      background-image: ${props.bimage};
+    `};
+`;
+
 const naverOAuth2 = "/oauth2/authorization/naver";
 const kakaoOAuth2 = "/oauth2/authorization/kakao";
 const facebookOAuth2 = "/oauth2/authorization/facebook";
 const googleOAuth2 = "/oauth2/authorization/google";
 
-export default function LoginPage({ referer }: any) {
-  const router = useRouter();
-  const user: UserDataType = useSelector(({ user }: any) => user);
-  const [isFail, setIsFail] = useState(false);
-  const [redirect, setRedirect] = useState(referer);
-
-  useEffect(() => {
-    if (user.name != "") {
-      router.back();
-    }
-
-    if (router.query["result"] !== undefined) {
-      setIsFail(true);
-      setRedirect(router.query["redirect"]);
-    }
-  }, [redirect, router, setIsFail, user.name]);
-
+function SocialButtons() {
   return (
-    <SSRProvider>
-      <AppBar title={"로그인"} showUnderLine={true} />
-      <form action="/api/v1/auth/login" method="post">
-        <div className={styles.LoginLogoBox}>
-          <div className={styles.LoginLogo}>CANDY</div>
-          <input type="hidden" id="redirect" value={redirect} />
-          <LoginTextBox
-            type="text"
-            id="id"
-            name="id"
-            required
-            placeholder="이메일 또는 휴대전화"
-          />
-          <LoginTextBox
-            type="password"
-            id="password"
-            name="pw"
-            required
-            isPassword
-            placeholder="비밀번호"
-          />
-          {isFail ? <FailBox>아이디 또는 비밀번호가 다릅니다!</FailBox> : null}
-          <LoginButton type="submit" value={"로그인"} />
-        </div>
-      </form>
-    </SSRProvider>
+    <SocialDiv>
+      <Circle bcolor="#3b5998" />
+      <Circle bimage="radial-gradient(circle at 22% 123%, #ffd879 9%, #fccb75 14%, #f4aa6c 24%, #e8745d 36%, #e45f58 41%, #d22a9c 62%, #6968df 91%)" />
+      <Circle bcolor="#2cb1f4" />
+      <Circle bcolor="#db4639" href={googleOAuth2} />
+      <Circle bcolor="#f9db00" />
+      <Circle bcolor="#03c75a" />
+    </SocialDiv>
   );
 }
 
