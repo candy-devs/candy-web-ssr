@@ -188,15 +188,10 @@ export default function LoginPage({ referer }: any) {
     if (user.name != "") {
       router.back();
     }
+
     if (router.query["result"] !== undefined) {
-      if (parseInt(router.query["result"] as string) === 0) {
-        if (router.query["redirect"] != "")
-          router.push(router.query["redirect"] as string);
-        else router.back();
-      } else {
-        setIsFail(true);
-        setRedirect(router.query["redirect"]);
-      }
+      setIsFail(true);
+      setRedirect(router.query["redirect"]);
     }
   }, [redirect, router, setIsFail, user.name]);
 
@@ -231,6 +226,22 @@ export default function LoginPage({ referer }: any) {
 }
 
 export async function getServerSideProps(context: any) {
+  if (context.query["result"] !== undefined) {
+    if (parseInt(context.query["result"] as string) === 0) {
+      return {
+        redirect: {
+          permanent: false,
+          destination:
+            context.query["redirect"] === undefined ||
+            context.query["redirect"] != ""
+              ? context.query["redirect"]
+              : "/",
+        },
+        props: {},
+      };
+    }
+  }
+
   return {
     props: {
       referer:
