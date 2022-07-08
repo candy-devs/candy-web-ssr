@@ -1,11 +1,17 @@
 import React from "react";
+import styled from "styled-components";
+import { OtherUserDataType } from "../models/OtherUserDataType";
 import styles from "./Profile.module.scss";
 import SelectButton from "./SelectButton";
 
-export default function Profile() {
+type ProfileProps = {
+  user: OtherUserDataType;
+};
+
+export default function Profile({ user }: ProfileProps) {
   return (
     <div className={styles.Profile}>
-      <div className={styles.ProfileThumbnail}/>
+      <ProfileImage src={user.picture} alt="profile" />
       <div className={styles.ProfileStatus}>
         <div className={styles.ProfileStatusUnit}>
           3천
@@ -30,11 +36,11 @@ export default function Profile() {
         <div className={styles.ProfileFunctionButton}>
           <SelectButton content="구독 중" />
         </div>
-        <div className={styles.ProfileFunctionDivider}/>
+        <div className={styles.ProfileFunctionDivider} />
         <div className={styles.ProfileFunctionButton}>
           <SelectButton content="채팅" />
         </div>
-        <div className={styles.ProfileFunctionDivider}/>
+        <div className={styles.ProfileFunctionDivider} />
         <div className={styles.ProfileFunctionButton}>
           <SelectButton content="선물하기" />
         </div>
@@ -42,3 +48,10 @@ export default function Profile() {
     </div>
   );
 }
+
+const ProfileImage = styled.img`
+  width: 60px;
+  height: 60px;
+  margin: 16px 29px;
+  border-radius: 6px;
+`;
