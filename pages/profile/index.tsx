@@ -11,7 +11,7 @@ export default function ProfilePage() {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx: any) => {
     const user: UserDataType = store.getState()["user"];
-    const cookie = ctx?.ctx?.req?.headers?.cookie;
+    const cookie = ctx?.req?.headers?.cookie;
 
     if (user.name === null || user.name === "") {
       return {

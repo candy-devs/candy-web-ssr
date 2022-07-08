@@ -42,7 +42,7 @@ const User: NextPage = ({ user }: any) => {
 
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
-  const cookie = context?.ctx?.req?.headers?.cookie;
+  const cookie = context?.req?.headers?.cookie;
 
   if (id === undefined || id === "") {
     return {
