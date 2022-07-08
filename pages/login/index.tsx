@@ -143,6 +143,15 @@ const LoginForm = styled.form`
   width: 320px;
 `;
 
+const SplitBarLineDetail = css`
+  content: "";
+  flex-grow: 1;
+  background: #f1f1f1;
+  height: 1px;
+  font-size: 0;
+  line-height: 0;
+`;
+
 const SplitBarLine = styled.div`
   display: flex;
   width: 320px;
@@ -155,22 +164,12 @@ const SplitBarLine = styled.div`
   font-weight: 500;
 
   &:before {
-    content: "";
-    flex-grow: 1;
-    background: #f1f1f1;
-    height: 1px;
-    font-size: 0;
-    line-height: 0;
+    ${SplitBarLineDetail}
     margin-right: 8px;
   }
 
   &:after {
-    content: "";
-    flex-grow: 1;
-    background: #f1f1f1;
-    height: 1px;
-    font-size: 0;
-    line-height: 0;
+    ${SplitBarLineDetail}
     margin-left: 8px;
   }
 `;

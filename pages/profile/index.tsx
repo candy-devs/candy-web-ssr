@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { UserDataType } from "../../api/UserApi";
 import { wrapper } from "../../store";
@@ -20,7 +21,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
       };
     }
 
+    const specific = await axios.get("/api/v1/user/specific");
+
     return {
+      redirect: {
+        permanent: false,
+        destination: `/user/${specific}`,
+      },
       props: {},
     };
   }
