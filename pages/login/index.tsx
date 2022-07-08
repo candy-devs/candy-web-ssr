@@ -194,6 +194,7 @@ export default function LoginPage({ referer }: any) {
           router.push(router.query["redirect"] as string);
         else router.back();
       } else {
+        setIsFail(true);
         setRedirect(router.query["redirect"]);
       }
     }
