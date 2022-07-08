@@ -232,7 +232,7 @@ export async function getServerSideProps(context: any) {
         redirect: {
           permanent: false,
           destination:
-            context.query["redirect"] === undefined ||
+            context.query["redirect"] !== undefined &&
             context.query["redirect"] != ""
               ? context.query["redirect"]
               : "/",
