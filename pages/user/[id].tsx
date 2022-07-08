@@ -1,3 +1,4 @@
+import axios from "axios";
 import { NextPage } from "next";
 import React, { useCallback, useState } from "react";
 import AppBar from "../../components/AppBar";
@@ -5,8 +6,9 @@ import ArticleHeaderItem from "../../components/ArticleHeaderItem";
 import BottomNavigation from "../../components/layouts/nav/BottomNavigation";
 import Profile from "../../components/Profile";
 import TabView from "../../components/TabView";
+import { OtherUserDataType } from "../../models/OtherUserDataType";
 
-const User: NextPage = () => {
+const User: NextPage = ({ user }: any) => {
   const [index, setIndex] = useState(0);
 
   const onChange = useCallback((index: number) => {
@@ -27,13 +29,33 @@ const User: NextPage = () => {
     <>
       <BottomNavigation selected={4} />
       <div className="user-tab">
-        <AppBar title={"아이디_ASDFASDF"} />
+        <AppBar title={user.name} />
         <Profile />
+        {user.picture}
         <TabView items={["게시글", "댓글", "방명록"]} onChange={onChange} />
         {pages[index]}
       </div>
     </>
   );
 };
+
+export async function getServerSideProps(context: any) {
+  const id = context.query.id;
+
+  if (id === undefined || id === "") {
+    return {
+      props: {},
+    };
+  }
+
+  const user = (await axios.get(`/api/v1/user/${id}`))
+    .data as OtherUserDataType;
+
+  return {
+    props: {
+      user: user,
+    },
+  };
+}
 
 export default User;

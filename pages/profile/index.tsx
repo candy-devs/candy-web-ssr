@@ -21,7 +21,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       };
     }
 
-    const specific = await axios.get("/api/v1/user/specific");
+    const specific = (await axios.get("/api/v1/user/specific")).data;
 
     return {
       redirect: {
