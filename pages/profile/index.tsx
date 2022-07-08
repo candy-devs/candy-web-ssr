@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { UserDataType } from "../../api/UserApi";
+import { apiPrefix } from "../../config/ApiConfig";
 import { wrapper } from "../../store";
 
 export default function ProfilePage() {
@@ -21,7 +22,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       };
     }
 
-    const specific = (await axios.get("/api/v1/user/specific")).data;
+    const specific = (await axios.get(`${apiPrefix}/api/v1/user/specific`))
+      .data;
 
     return {
       redirect: {
