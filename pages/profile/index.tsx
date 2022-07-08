@@ -11,6 +11,7 @@ export default function ProfilePage() {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx: any) => {
     const user: UserDataType = store.getState()["user"];
+    const cookie = ctx?.ctx?.req?.headers?.cookie;
 
     if (user.name === null || user.name === "") {
       return {
@@ -22,8 +23,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
       };
     }
 
-    const specific = (await axios.get(`${apiPrefix}/api/v1/user/specific`))
-      .data;
+    const specific = (
+      await axios.get(`${apiPrefix}/api/v1/user/specific`, {
+        headers: {
+          cookie: cookie!,
+        },
+      })
+    ).data;
 
     return {
       redirect: {
