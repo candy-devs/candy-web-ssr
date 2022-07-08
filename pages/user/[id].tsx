@@ -6,6 +6,7 @@ import ArticleHeaderItem from "../../components/ArticleHeaderItem";
 import BottomNavigation from "../../components/layouts/nav/BottomNavigation";
 import Profile from "../../components/Profile";
 import TabView from "../../components/TabView";
+import { apiPrefix } from "../../config/ApiConfig";
 import { OtherUserDataType } from "../../models/OtherUserDataType";
 
 const User: NextPage = ({ user }: any) => {
@@ -41,6 +42,7 @@ const User: NextPage = ({ user }: any) => {
 
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
+  const cookie = context?.ctx?.req?.headers?.cookie;
 
   if (id === undefined || id === "") {
     return {
@@ -48,8 +50,13 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const user = (await axios.get(`/api/v1/user/${id}`))
-    .data as OtherUserDataType;
+  const user = (
+    await axios.get(`${apiPrefix}/api/v1/user/${id}`, {
+      headers: {
+        cookie: cookie!,
+      },
+    })
+  ).data as OtherUserDataType;
 
   return {
     props: {

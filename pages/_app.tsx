@@ -5,6 +5,7 @@ import { ReactElement, ReactNode } from "react";
 import { wrapper } from "../store";
 import axios from "axios";
 import * as userActions from "../store/modules/user";
+import { apiPrefix } from "../config/ApiConfig";
 
 // https://nextjs.org/docs/basic-features/layouts
 
@@ -28,14 +29,11 @@ MyApp.getInitialProps = wrapper.getInitialPageProps(
     const cookie = ctx?.ctx?.req?.headers?.cookie;
     if (cookie !== undefined) {
       try {
-        const uinfo = await axios.get(
-          "http://localhost:8080/api/v1/user/info",
-          {
-            headers: {
-              cookie: cookie!,
-            },
-          }
-        );
+        const uinfo = await axios.get(`${apiPrefix}/api/v1/user/info`, {
+          headers: {
+            cookie: cookie!,
+          },
+        });
         if (uinfo.data != "") store.dispatch(userActions.set(uinfo.data));
       } catch (_) {}
     }
