@@ -202,7 +202,7 @@ export default function LoginPage({ referer }: any) {
   return (
     <SSRProvider>
       <AppBar title={"로그인"} showUnderLine={true} />
-      <form action="http://localhost:8080/api/v1/auth/login" method="post">
+      <form action="/api/v1/auth/login" method="post">
         <div className={styles.LoginLogoBox}>
           <div className={styles.LoginLogo}>CANDY</div>
           <input type="hidden" id="redirect" value={redirect} />
