@@ -14,14 +14,14 @@ export default function WritePage() {
       <AppBar title={"글 쓰기"} showUnderLine alignCenter />
 
       <WriteForm action="/api/v1/article" method="post">
-        <input type="hidden" id="boardKey" value="test" />
+        <input type="hidden" name="boardKey" value="test" />
 
-        <TitleText placeholder="제목" id="title" />
+        <TitleText placeholder="제목" name="title" />
         <UnderLine />
         <BodyText
           placeholder="본문에 #을 이용해 태그를 입력해보세요."
           onInput={(e) => auto_grow(e.currentTarget)}
-          id="value"
+          name="value"
         />
         {/* <CancelButton type="submit" value={"취소"} /> */}
         <PostButton type="submit" value={"등록"} />
@@ -102,7 +102,7 @@ const PostButton = styled.input`
   outline: none;
   background: none;
 
-  /* margin: 25px 20px 30px; */
+  width: 100%;
   margin-top: 25px;
   padding: 10px 25px;
   border-radius: 5px;

@@ -38,7 +38,7 @@ export default function LoginPage({ referer }: any) {
       <div className={styles.LoginLogoBox}>
         <div className={styles.LoginLogo}>CANDY</div>
         <LoginForm action="/api/v1/auth/login" method="post">
-          <input type="hidden" id="redirect" value={redirect} />
+          <input type="hidden" name="redirect" value={redirect} />
           <LoginTextBox
             type="text"
             id="id"
