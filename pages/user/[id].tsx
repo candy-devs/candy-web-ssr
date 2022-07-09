@@ -10,7 +10,11 @@ import TabView from "../../components/TabView";
 import { apiPrefix } from "../../config/ApiConfig";
 import { OtherUserDataType } from "../../models/OtherUserDataType";
 
-const User: NextPage = ({ user }: any) => {
+type UserPageProps = {
+  user: OtherUserDataType | null;
+};
+
+export default function UserPage({ user }: UserPageProps) {
   const [index, setIndex] = useState(0);
 
   const onChange = useCallback((index: number) => {
@@ -42,7 +46,7 @@ const User: NextPage = ({ user }: any) => {
       </UserTab>
     </>
   );
-};
+}
 
 function UserNotFound() {
   return (
@@ -75,14 +79,11 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const user = (await axios.get(`${apiPrefix}/api/v1/user/${id}`))
-    .data as OtherUserDataType;
+  const data = (await axios.get(`${apiPrefix}/api/v1/user/${id}`)).data;
 
   return {
     props: {
-      user: user,
+      user: data === "" ? null : (data as OtherUserDataType),
     },
   };
 }
-
-export default User;
