@@ -1,6 +1,7 @@
 import axios from "axios";
 import { NextPage } from "next";
 import React, { useCallback, useState } from "react";
+import styled from "styled-components";
 import AppBar from "../../components/AppBar";
 import ArticleHeaderItem from "../../components/ArticleHeaderItem";
 import BottomNavigation from "../../components/layouts/nav/BottomNavigation";
@@ -26,22 +27,47 @@ const User: NextPage = ({ user }: any) => {
     <div key={2}></div>,
   ];
 
+  if (user === undefined) {
+    return <UserNotFound />;
+  }
+
   return (
     <>
+      <AppBar title={user.name} />
       <BottomNavigation selected={4} />
-      <div className="user-tab">
-        <AppBar title={user.name} />
+      <UserTab>
         <Profile user={user} />
         <TabView items={["게시글", "댓글", "방명록"]} onChange={onChange} />
         {pages[index]}
-      </div>
+      </UserTab>
     </>
   );
 };
 
+function UserNotFound() {
+  return (
+    <CenterText>
+      <div>사용자를 찾을 수 없습니다!</div>
+    </CenterText>
+  );
+}
+
+const UserTab = styled.div`
+  padding-top: 51px;
+`;
+
+const CenterText = styled.div`
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+`;
+
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
-  const cookie = context?.req?.headers?.cookie;
 
   if (id === undefined || id === "") {
     return {
@@ -49,13 +75,8 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const user = (
-    await axios.get(`${apiPrefix}/api/v1/user/${id}`, {
-      headers: {
-        cookie: cookie!,
-      },
-    })
-  ).data as OtherUserDataType;
+  const user = (await axios.get(`${apiPrefix}/api/v1/user/${id}`))
+    .data as OtherUserDataType;
 
   return {
     props: {
