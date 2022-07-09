@@ -13,13 +13,18 @@ export default function WritePage() {
     <>
       <AppBar title={"글 쓰기"} showUnderLine alignCenter />
 
-      <WriteForm>
-        <TitleText placeholder="제목" />
+      <WriteForm action="/api/v1/article" method="post">
+        <input type="hidden" id="boardKey" value="test" />
+
+        <TitleText placeholder="제목" id="title" />
         <UnderLine />
         <BodyText
           placeholder="본문에 #을 이용해 태그를 입력해보세요."
           onInput={(e) => auto_grow(e.currentTarget)}
+          id="value"
         />
+        {/* <CancelButton type="submit" value={"취소"} /> */}
+        <PostButton type="submit" value={"등록"} />
       </WriteForm>
 
       <BottomNavigation selected={2} />
@@ -27,7 +32,7 @@ export default function WritePage() {
   );
 }
 
-const WriteForm = styled.div`
+const WriteForm = styled.form`
   display: flex;
   padding: 16px;
   flex-direction: column;
@@ -89,5 +94,40 @@ const BodyText = styled.textarea`
 
   textarea::placeholder {
     color: #000000;
+  }
+`;
+
+const PostButton = styled.input`
+  border: none;
+  outline: none;
+  background: none;
+
+  /* margin: 25px 20px 30px; */
+  margin-top: 25px;
+  padding: 10px 25px;
+  border-radius: 5px;
+  background-color: #5673eb;
+
+  font-family: NotoSansCJKKR;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ededed;
+
+  :hover {
+    background-color: #b0bdf3;
+  }
+`;
+
+const CancelButton = styled(PostButton)`
+  background-color: #ededed;
+  color: black;
+
+  :hover {
+    background-color: #c9c9c9;
   }
 `;
