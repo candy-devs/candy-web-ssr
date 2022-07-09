@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import AppBar from "../../components/AppBar";
 import BottomNavigation from "../../components/layouts/nav/BottomNavigation";
+import { apiPrefixClient } from "../../config/ApiConfig";
 
 export default function WritePage() {
   function auto_grow(element: any) {
@@ -9,11 +10,13 @@ export default function WritePage() {
     element.style.height = element.scrollHeight + "px";
   }
 
+  const postClick = useCallback(() => {}, []);
+
   return (
     <>
       <AppBar title={"글 쓰기"} showUnderLine alignCenter />
 
-      <WriteForm action="/api/v1/article" method="post">
+      <WriteForm action={`${apiPrefixClient}/api/v1/article`} method="post">
         <input type="hidden" name="boardKey" value="test" />
 
         <TitleText placeholder="제목" name="title" />
@@ -21,10 +24,10 @@ export default function WritePage() {
         <BodyText
           placeholder="본문에 #을 이용해 태그를 입력해보세요."
           onInput={(e) => auto_grow(e.currentTarget)}
-          name="value"
+          name="body"
         />
         {/* <CancelButton type="submit" value={"취소"} /> */}
-        <PostButton type="submit" value={"등록"} />
+        <PostButton type="button" value={"등록"} onClick={postClick} />
       </WriteForm>
 
       <BottomNavigation selected={2} />
@@ -102,7 +105,6 @@ const PostButton = styled.input`
   outline: none;
   background: none;
 
-  width: 100%;
   margin-top: 25px;
   padding: 10px 25px;
   border-radius: 5px;
@@ -117,6 +119,8 @@ const PostButton = styled.input`
   line-height: normal;
   letter-spacing: normal;
   color: #ededed;
+
+  cursor: pointer;
 
   :hover {
     background-color: #b0bdf3;

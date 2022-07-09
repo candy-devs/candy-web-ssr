@@ -14,6 +14,7 @@ import styled, { css } from "styled-components";
 import SelectButton from "../../components/SelectButton";
 import { Router, useRouter } from "next/router";
 import { getSortedRoutes } from "next/dist/shared/lib/router/utils";
+import { apiPrefixClient } from "../../config/ApiConfig";
 
 export default function LoginPage({ referer }: any) {
   const router = useRouter();
@@ -37,7 +38,10 @@ export default function LoginPage({ referer }: any) {
       <AppBar title={"로그인"} showUnderLine={true} />
       <div className={styles.LoginLogoBox}>
         <div className={styles.LoginLogo}>CANDY</div>
-        <LoginForm action="/api/v1/auth/login" method="post">
+        <LoginForm
+          action={`${apiPrefixClient}/api/v1/auth/login`}
+          method="post"
+        >
           <input type="hidden" name="redirect" value={redirect} />
           <LoginTextBox
             type="text"
