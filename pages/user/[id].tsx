@@ -27,7 +27,7 @@ const User: NextPage = ({ user }: any) => {
     <div key={2}></div>,
   ];
 
-  if (user === undefined) {
+  if (user === undefined || user === null) {
     return <UserNotFound />;
   }
 
