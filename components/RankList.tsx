@@ -83,8 +83,11 @@ export default function RankList() {
 }
 
 const CarouselContainer = styled.div`
-  .slick-dots li button:before {
-    transition-duration: 300ms;
+  .slick-dots li {
+    margin: 0px;
+    button:before {
+      transition-duration: 300ms;
+    }
   }
   padding: 0;
   max-width: 100vw;
