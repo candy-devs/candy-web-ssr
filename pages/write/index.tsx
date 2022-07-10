@@ -1,41 +1,90 @@
+import axios from "axios";
+import { ErrorMessage, Field, Form, Formik, useField } from "formik";
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import AppBar from "../../components/AppBar";
 import BottomNavigation from "../../components/layouts/nav/BottomNavigation";
 import { apiPrefixClient } from "../../config/ApiConfig";
+import * as Yup from "yup";
+import { Modal, SSRProvider } from "react-bootstrap";
+import { ArticleWriteResponseDto } from "../../models/dto/ArticleWriteResponseDto";
+import { remoteAction } from "../../api/RemoteAtcions";
+
+interface IWriteForm {
+  boardKey: string;
+  title: string;
+  body: string;
+}
 
 export default function WritePage() {
-  function auto_grow(element: any) {
-    element.style.height = "5px";
-    element.style.height = element.scrollHeight + "px";
-  }
-
   const postClick = useCallback(() => {}, []);
+
+  const onSubmit = remoteAction(async (values: IWriteForm) => {
+    const validationResult = await validationSchema
+      .validate(values, { abortEarly: false })
+      .catch((err: any) => {
+        alert(err.errors[0]);
+        return null;
+      });
+
+    console.log(values);
+
+    if (validationResult !== null) {
+      const data = (
+        await axios.post(`${apiPrefixClient}/api/v1/article`, values)
+      ).data;
+      const res = data as ArticleWriteResponseDto;
+
+      if (res.articleId === -1) {
+        alert("서버에서 오류를 반환했습니다!");
+      } else {
+        navigator;
+      }
+    }
+  });
 
   return (
     <>
       <AppBar title={"글 쓰기"} showUnderLine alignCenter />
 
-      <WriteForm action={`${apiPrefixClient}/api/v1/article`} method="post">
-        <input type="hidden" name="boardKey" value="test" />
-
-        <TitleText placeholder="제목" name="title" />
-        <UnderLine />
-        <BodyText
-          placeholder="본문에 #을 이용해 태그를 입력해보세요."
-          onInput={(e) => auto_grow(e.currentTarget)}
-          name="body"
-        />
-        {/* <CancelButton type="submit" value={"취소"} /> */}
-        <PostButton type="button" value={"등록"} onClick={postClick} />
-      </WriteForm>
+      <Formik
+        initialValues={FormInitialValues}
+        // validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        <WriteForm>
+          <input type="hidden" name="boardKey" value="test" />
+          <TitleText placeholder="제목" name="title" />
+          <UnderLine />
+          <FormbikBodyTextarea />
+          <PostButton type="submit" value={"등록"} onClick={postClick} />
+        </WriteForm>
+      </Formik>
 
       <BottomNavigation selected={2} />
     </>
   );
 }
 
-const WriteForm = styled.form`
+const validationSchema = Yup.object().shape({
+  boardKey: Yup.string().max(10, "Invalid Board!").required(),
+  title: Yup.string()
+    .min(1, "Title is too short!")
+    .max(64, "Title is too long!")
+    .required(),
+  body: Yup.string()
+    .min(1, "Body is too short!")
+    .max(65536, "Body is too long!")
+    .required(),
+});
+
+const FormInitialValues = {
+  boardKey: "test",
+  title: "",
+  body: "",
+};
+
+const WriteForm = styled(Form)`
   display: flex;
   padding: 16px;
   flex-direction: column;
@@ -45,7 +94,7 @@ const WriteForm = styled.form`
   /* flex: 1 1 auto; */
 `;
 
-const TitleText = styled.input`
+const TitleText = styled(Field)`
   font-family: NotoSansCJKKR;
   font-size: 16px;
   font-weight: bold;
@@ -99,6 +148,25 @@ const BodyText = styled.textarea`
     color: #000000;
   }
 `;
+
+function FormbikBodyTextarea() {
+  function auto_grow(element: any) {
+    element.style.height = "5px";
+    element.style.height = element.scrollHeight + "px";
+  }
+
+  const [field, meta, helpers] = useField("body");
+
+  return (
+    <BodyText
+      placeholder="본문에 #을 이용해 태그를 입력해보세요."
+      name="body"
+      onInput={(e) => auto_grow(e.currentTarget)}
+      value={meta.value}
+      onChange={field.onChange}
+    />
+  );
+}
 
 const PostButton = styled.input`
   border: none;
