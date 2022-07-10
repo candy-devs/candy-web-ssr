@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { Modal, SSRProvider } from "react-bootstrap";
 import { ArticleWriteResponseDto } from "../../models/dto/ArticleWriteResponseDto";
 import { remoteAction } from "../../api/RemoteAtcions";
+import { useRouter } from "next/router";
 
 interface IWriteForm {
   boardKey: string;
@@ -17,6 +18,8 @@ interface IWriteForm {
 }
 
 export default function WritePage() {
+  const router = useRouter();
+
   const postClick = useCallback(() => {}, []);
 
   const onSubmit = remoteAction(async (values: IWriteForm) => {
@@ -27,8 +30,6 @@ export default function WritePage() {
         return null;
       });
 
-    console.log(values);
-
     if (validationResult !== null) {
       const data = (
         await axios.post(`${apiPrefixClient}/api/v1/article`, values)
@@ -38,7 +39,7 @@ export default function WritePage() {
       if (res.articleId === -1) {
         alert("서버에서 오류를 반환했습니다!");
       } else {
-        navigator;
+        router.push(`/article/${res.articleId}`);
       }
     }
   });
