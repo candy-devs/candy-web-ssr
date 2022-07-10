@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { SWRConfig } from "swr";
-import useArticle, { getArticle } from "../../../api/ArticleApi";
+import useArticle, { getArticle } from "../../api/ArticleApi";
 
 export default function ArticleRead({ fallback, id }: any) {
   return (
