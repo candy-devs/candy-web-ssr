@@ -13,7 +13,7 @@ export default function ArticleHeaderItem({ article }: ArticleHeaderItemType) {
   return (
     <article className={styles.ArticleHeaderItem}>
       <a
-        href={`/article/read?id=${article?.id}`}
+        href={`/article/read/${article?.id}`}
         className={styles.ArticleHeaderItemLinker}
       >
         {" "}
